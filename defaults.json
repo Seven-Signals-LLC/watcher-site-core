@@ -6,6 +6,7 @@
     {"key": "why", "label": "Why Us", "href": "/#why"},
     {"key": "signals", "label": "The Signals", "href": "/#signals"},
     {"key": "solutions", "label": "Solutions", "href": "/#solutions"},
+    {"key": "usecases", "label": "Use cases", "href": "/use-cases/"},
     {"key": "report", "label": "Industry Report", "href": "/industry-report/"},
     {"key": "pricing", "label": "Pricing", "href": "/#pricing"},
     {"key": "contact", "label": "Contact", "href": "/contact/"}
