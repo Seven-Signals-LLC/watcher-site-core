@@ -7,6 +7,7 @@ The shared framework for every **Watcher** marketing site by 7 Signals (DecorWat
 - the footer, including the Watcher family links (`family.json`)
 - tracking (UXWizz, PipelineOn), set per site in `site.json`
 - the build script and `sitemap.xml`
+- the industry report at `/industry-report/`, built from each vertical's research document (see [docs/industry-report.md](docs/industry-report.md))
 
 Each site keeps its own **look** (stylesheet, fonts, logo), **pages** and **content** in its own repo. This repo holds no secrets, customer data or market numbers, which is why it can be public.
 
@@ -20,6 +21,8 @@ A site repo contains:
 | `site.json` | Brand, menu, button, footer, tracking, stylesheet and fonts. Start from [`templates/site.example.json`](templates/site.example.json) |
 | `tools/build.py` | Copy of [`templates/build.py`](templates/build.py). Downloads the pinned core and runs it |
 | `src/pages/*.html` | The site's pages. Each starts with a `<!--meta {...} -->` JSON block (title, description, path, nav, schema) |
+| `research/` | Research documents for the industry report. Never published |
+| `content/industry-report.json` | The industry report's content, drafted from `research/` by Claude and reviewed in a pull request. The core builds `/industry-report/` from it |
 | `src/partials/mark-light.html` | Optional: the logo mark for the dark footer. Without it, the header logo is reused |
 | `public/` | Static files (css, js, images, fonts). Built HTML is written here |
 
@@ -102,6 +105,7 @@ Each `src/pages/*.html` starts with `<!--meta {...} -->`. Keys: `title`, `descri
 ## Roadmap
 
 - **v0.1**: shared layout, header, footer, tracking, build and sitemap. Pilot: DecorWatcher. v0.1.1 adds the optional settings needed by the second site, FencePostWatcher.
-- **v0.2** (this): shared menu and demo button defaults, shared demo wording, pricing and get-started sections. Pilot: FencePostWatcher.
-- **v0.3**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling and consent banner.
-- **v0.4**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.
+- **v0.2**: shared menu and demo button defaults, shared demo wording, pricing and get-started sections. Pilot: FencePostWatcher.
+- **v0.3** (this): industry report built from each vertical's research document. Pilot: DecorWatcher.
+- **v0.4**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling (including the report's charts and tables) and consent banner.
+- **v0.5**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.

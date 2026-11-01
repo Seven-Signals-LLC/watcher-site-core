@@ -14,9 +14,11 @@ Site layout it expects (paths relative to the site root):
 Usage:  python3 build.py --site /path/to/site
 Needs only the Python 3 standard library.
 """
-import argparse, datetime, html, json, pathlib, re, time
+import argparse, datetime, html, json, pathlib, re, sys, time
 
 CORE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(CORE))
+import report  # noqa: E402  (core/report.py: the industry report page)
 META_RE = re.compile(r"^\s*<!--meta\s+(\{.*?\})\s*-->\s*", re.S)
 INCLUDE_RE = re.compile(r"<!--core:([\w-]+)-->\n?")
 
@@ -220,14 +222,24 @@ def build(root):
     sections = section_context(site)
     scripts = "\n".join(f'<script src="{s["src"]}?v={version}"{" defer" if s.get("defer") else ""}></script>' for s in site.get("scripts", []))
 
-    sitemap = []
-    for page in sorted((src / "pages").glob("*.html")):
+    pages = []
+    for page in (src / "pages").glob("*.html"):
         raw = page.read_text()
         m = META_RE.match(raw)
         if not m:
             raise SystemExit(f"{page.name}: missing <!--meta {{...}} --> block")
-        meta = json.loads(m.group(1))
-        body = expand_includes(raw[m.end():], sections, page.name)
+        pages.append((page.name, json.loads(m.group(1)), raw[m.end():]))
+
+    # Industry report: built from content/industry-report.json when the site has one (docs/industry-report.md).
+    report_json = root / "content/industry-report.json"
+    if report_json.exists():
+        if any(name == "industry-report.html" for name, _, _ in pages):
+            raise SystemExit("Both content/industry-report.json and src/pages/industry-report.html exist; keep one.")
+        pages.append(("industry-report.html", *report.render(report.load(report_json), site)))
+
+    sitemap = []
+    for name, meta, raw_body in sorted(pages, key=lambda p: p[0]):
+        body = expand_includes(raw_body, sections, name)
         path = meta["path"]
         nav_links, mobile_links = nav_html(site, meta.get("nav", ""))
         schemas = [org_schema(site, url)] if path == "/" else []

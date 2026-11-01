@@ -6,3 +6,4 @@ This repo is public. Never add secrets, API keys, customer data or market number
 - Site-specific things (look, fonts, logo, copy, pages, data) belong in the site repo, not here. If a site needs something different, add a `site.json` setting rather than a special case.
 - Use only the Python 3 standard library in `build.py` and `templates/build.py`; Cloudflare builds run them as-is.
 - Record every release in `CHANGELOG.md` and tag it (`v0.x.y`).
+- To draft a site's industry report from its research document, follow `docs/industry-report.md`.
