@@ -18,6 +18,23 @@ import argparse, datetime, html, json, pathlib, re, time
 
 CORE = pathlib.Path(__file__).resolve().parent
 META_RE = re.compile(r"^\s*<!--meta\s+(\{.*?\})\s*-->\s*", re.S)
+INCLUDE_RE = re.compile(r"<!--core:([\w-]+)-->\n?")
+
+
+def load_site(root):
+    """site.json on top of the shared defaults.json. A key the site sets wins;
+    "words" and "pricing" are merged one level deep so a site can change a single entry."""
+    defaults = json.loads((CORE / "defaults.json").read_text())
+    site = json.loads((root / "site.json").read_text())
+    merged = {**defaults, **site}
+    for key in ("words", "pricing"):
+        merged[key] = {**defaults.get(key, {}), **site.get(key, {})}
+    return merged
+
+
+def href_for(site, item):
+    """A site can repoint a standard link by key, e.g. "hrefs": {"report": "/#report"}."""
+    return site.get("hrefs", {}).get(item.get("key"), item["href"])
 
 
 def render(tpl, ctx):
@@ -37,7 +54,7 @@ def brand_word(site):
 def nav_html(site, current):
     desk, mobile = [], []
     for item in site["nav"]:
-        href, label = item["href"], item["label"]
+        href, label = href_for(site, item), item["label"]
         cur = ' aria-current="page"' if current and item.get("key") == current and not href.startswith("/#") else ""
         desk.append(f'        <li><a href="{href}"{cur}>{label}</a></li>')
         mobile.append(f'    <li><a href="{href}">{label}</a></li>')
@@ -61,7 +78,8 @@ def footer_columns_html(site):
             links = family_links(site) if group.get("family") else group.get("links", [])
             for link in links:
                 if "href" in link:
-                    out.append(f'          <li><a href="{link["href"]}"{rel_for(link["href"])}>{link["label"]}</a></li>')
+                    href = href_for(site, link)
+                    out.append(f'          <li><a href="{href}"{rel_for(href)}>{link["label"]}</a></li>')
                 else:
                     out.append(f'          <li><span>{link["text"]}</span></li>')
             out.append("        </ul>")
@@ -118,6 +136,42 @@ def og_image_meta(site, url):
     return og, f'\n<meta name="twitter:image" content="{img}">'
 
 
+def legal_href(site, word, default):
+    for link in site["footer"].get("legal", DEFAULT_LEGAL):
+        if word in link["label"]:
+            return link["href"]
+    return default
+
+
+def section_context(site):
+    """Values the shared sections (partials/sections/*.html) are filled with."""
+    words, pricing = site["words"], site["pricing"]
+    ctx = {**words, "brand": site["brand"], "demo_url": site["demo_url"], "lead_endpoint": site["lead_endpoint"],
+           "report_href": href_for(site, {"key": "report", "href": "/industry-report/"}),
+           "privacy_href": legal_href(site, "Privacy", "/privacy-policy/"),
+           "terms_href": legal_href(site, "Terms", "/terms/")}
+    checkout = pricing.get("checkout_url") or "/contact/?plan=subscription"
+    ctx.update({
+        "plan_name": pricing["plan_name"], "price": pricing["price"], "price_note": pricing["price_note"],
+        "checkout_url": checkout, "checkout_rel": rel_for(checkout), "checkout_label": pricing["checkout_label"],
+        "checkout_fine": "Secure checkout by Stripe" if pricing.get("checkout_url") else "We'll set up your account with you",
+    })
+    item = lambda t: "          <li>" + render(t, ctx) + "</li>"
+    ctx["plan_items"] = "\n".join(item(t) for t in pricing["plan_items"])
+    ctx["custom_items"] = "\n".join(item(t) for t in pricing["custom_items"])
+    return ctx
+
+
+def expand_includes(body, ctx, page_name):
+    """Swap each <!--core:NAME--> in a page for the shared section partials/sections/NAME.html."""
+    def one(m):
+        f = CORE / "partials/sections" / f"{m.group(1)}.html"
+        if not f.exists():
+            raise SystemExit(f"{page_name}: unknown shared section <!--core:{m.group(1)}-->")
+        return render(f.read_text(), ctx)
+    return INCLUDE_RE.sub(one, body)
+
+
 def head_extra(*parts):
     """Raw HTML added at the end of <head>: the site's first, then the page's own."""
     return "".join("\n" + p.strip() for p in parts if p and p.strip())
@@ -137,7 +191,7 @@ def tracking_html(site):
 def build(root):
     root = pathlib.Path(root).resolve()
     src, out = root / "src", root / "public"
-    site = json.loads((root / "site.json").read_text())
+    site = load_site(root)
     url = site["site_url"].rstrip("/")
     version = time.strftime("%Y%m%d%H%M")
 
@@ -163,6 +217,7 @@ def build(root):
     preloads = "\n".join(f'<link rel="preload" href="{f}" as="font" type="font/woff2" crossorigin>' for f in site.get("preload_fonts", []))
     og_meta, twitter_meta = og_image_meta(site, url)
     icons = icon_links(site)
+    sections = section_context(site)
     scripts = "\n".join(f'<script src="{s["src"]}?v={version}"{" defer" if s.get("defer") else ""}></script>' for s in site.get("scripts", []))
 
     sitemap = []
@@ -172,7 +227,7 @@ def build(root):
         if not m:
             raise SystemExit(f"{page.name}: missing <!--meta {{...}} --> block")
         meta = json.loads(m.group(1))
-        body = raw[m.end():]
+        body = expand_includes(raw[m.end():], sections, page.name)
         path = meta["path"]
         nav_links, mobile_links = nav_html(site, meta.get("nav", ""))
         schemas = [org_schema(site, url)] if path == "/" else []

@@ -1,0 +1,44 @@
+{
+  "login_url": "https://gcpwatcher.com/user_reg/login.php",
+  "demo_url": "https://signalstogrowth.com/",
+  "lead_endpoint": "https://watcher-leads.dan-09c.workers.dev/lead",
+  "nav": [
+    {"key": "why", "label": "Why Us", "href": "/#why"},
+    {"key": "signals", "label": "The Signals", "href": "/#signals"},
+    {"key": "solutions", "label": "Solutions", "href": "/#solutions"},
+    {"key": "report", "label": "Industry Report", "href": "/industry-report/"},
+    {"key": "pricing", "label": "Pricing", "href": "/#pricing"},
+    {"key": "contact", "label": "Contact", "href": "/contact/"}
+  ],
+  "cta": {"label": "Try the demo", "label_long": "See the demo for free", "href": "https://signalstogrowth.com/"},
+  "words": {
+    "business": "business",
+    "businesses": "businesses",
+    "Business": "Business",
+    "payoff": "A single new client",
+    "email_placeholder": "you@yourbusiness.com",
+    "site_placeholder": "yourbusiness.com"
+  },
+  "pricing": {
+    "plan_name": "Pro",
+    "price": "$149",
+    "price_note": "per month, cancel anytime",
+    "checkout_label": "Subscribe for $149/mo",
+    "checkout_url": "",
+    "plan_items": [
+      "Your full {{brand}} dashboard",
+      "All seven signals, refreshed weekly",
+      "Every {{business}} in your market, ranked",
+      "Neuro web-design analysis",
+      "Review intelligence &amp; AI search reports",
+      "A prioritized plan, updated monthly"
+    ],
+    "custom_items": [
+      "Website fixes &amp; design changes",
+      "SEO, GEO &amp; AI-search implementation",
+      "Case studies &amp; portfolio content",
+      "Google Business Profile &amp; review setup",
+      "By 7 Signals or our vetted partners"
+    ]
+  }
+}

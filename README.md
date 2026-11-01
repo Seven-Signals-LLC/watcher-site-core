@@ -65,6 +65,36 @@ WATCHER_CORE_PATH=../watcher-site-core python3 tools/build.py
 | `footer` | `blurb`, and `columns`: each column is a list of groups with a `title` and `links`, or `"family": true` for the Watcher family list. Optional `legal`: the bottom links as `{"label", "href"}` (default Privacy Policy `/privacy-policy/`, Terms `/terms/`) |
 | `organization` | Structured data on the home page. Optional `logo` path (default `/icon-512.png`) |
 
+## Shared defaults (`defaults.json`)
+
+Every site starts from `defaults.json`, the DecorWatcher standard. Anything a site sets in `site.json` wins, so a site only lists what's different.
+
+| Key | Default |
+|---|---|
+| `nav` | Why Us, The Signals, Solutions, Industry Report, Pricing, Contact |
+| `cta` | **Try the demo** (mobile menu: **See the demo for free**) → the Watcher demo |
+| `login_url`, `demo_url`, `lead_endpoint` | Watcher login, the demo, the shared watcher-leads Worker |
+| `words` | The site's nouns for the shared sections: `business`, `businesses`, `Business`, `payoff`, `email_placeholder`, `site_placeholder` |
+| `pricing` | `plan_name`, `price`, `price_note`, `checkout_label`, `checkout_url` (Stripe link; without it the button goes to `/contact/?plan=subscription`), `plan_items`, `custom_items` |
+
+`words` and `pricing` merge entry by entry, so `"pricing": {"plan_name": "Contractor"}` changes only the plan name.
+
+`hrefs` repoints a standard link by its `key` everywhere it appears (menu, footer, shared sections). For example, a site without an `/industry-report/` page sets `"hrefs": {"report": "/#report"}`. Footer links can carry a `key` too.
+
+## Shared sections
+
+Put a marker in a page and the build swaps in the shared section from `partials/sections/`, filled with the site's `words` and `pricing`:
+
+| Marker | What it is |
+|---|---|
+| `<!--core:demo-button-->` | "See the demo for free" button (`.btn.btn--demo`) |
+| `<!--core:demo-trust-->` | 5-minute demo · No credit card · No client data needed (`.demo-trust`) |
+| `<!--core:demo-ps-->` | "P.S. The demo is free…" line (`.demo-ps`) |
+| `<!--core:get-started-->` | "I want to get started" section with the client set-up form, posting to the watcher-leads Worker (works without JavaScript too; lands on `/thank-you/`) |
+| `<!--core:pricing-->` | Pricing: free demo, subscription plan, custom services |
+
+The wording lives here so it changes once for every site. Each site styles the section classes (`core-pricing`, `plan`, `core-start`, `core-form`, …) in its own stylesheet.
+
 ## Page meta reference
 
 Each `src/pages/*.html` starts with `<!--meta {...} -->`. Keys: `title`, `description`, `path` (required); `og_title`, `og_type`, `nav`, `robots`, `body_class`, `schema` (list of JSON-LD objects), `priority`, `sitemap` (false to leave the page out), and `head` (extra HTML for this page's `<head>`, such as a hero image preload or a page `<style>` block). Pages whose `robots` contains `noindex` are left out of the sitemap.
@@ -72,5 +102,6 @@ Each `src/pages/*.html` starts with `<!--meta {...} -->`. Keys: `title`, `descri
 ## Roadmap
 
 - **v0.1**: shared layout, header, footer, tracking, build and sitemap. Pilot: DecorWatcher. v0.1.1 adds the optional settings needed by the second site, FencePostWatcher.
-- **v0.2**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling, forms script and consent banner.
-- **v0.3**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.
+- **v0.2** (this): shared menu and demo button defaults, shared demo wording, pricing and get-started sections. Pilot: FencePostWatcher.
+- **v0.3**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling and consent banner.
+- **v0.4**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.

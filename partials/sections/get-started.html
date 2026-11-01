@@ -1,0 +1,100 @@
+<section class="core-start" id="get-started" aria-labelledby="get-started-title">
+  <div class="wrap">
+    <div class="core-start__grid">
+      <div>
+        <p class="eyebrow">Get started</p>
+        <h2 id="get-started-title">I want to <em>get started.</em></h2>
+        <p class="lede">Sign up today. We'll run your {{business}} through all seven signals and show you exactly where you stand.</p>
+        <ol class="core-start__list">
+          <li>Composite score and letter grade</li>
+          <li>Your position among nearby {{businesses}}</li>
+          <li>Review intelligence snapshot</li>
+          <li>Neuro design grade for your homepage</li>
+          <li>AI search and SEO check</li>
+          <li>Your top three moves</li>
+        </ol>
+      </div>
+      <div class="core-start__card">
+        <!-- Shared Watcher lead Worker (Seven-Signals-LLC/watcher-lead-forms) → Attio web_leads; the Worker sets the Vertical from the domain -->
+        <form class="core-form" action="{{lead_endpoint}}" method="POST" novalidate>
+          <h3>Get me started</h3>
+          <p class="core-form__sub">Client set-up request</p>
+          <input type="hidden" name="page_url">
+          <input type="hidden" name="referrer">
+          <input type="hidden" name="utm_source">
+          <input type="hidden" name="utm_medium">
+          <input type="hidden" name="utm_campaign">
+          <input type="hidden" name="utm_term">
+          <input type="hidden" name="utm_content">
+          <input type="hidden" name="_redirect" value="/thank-you/">
+          <input type="hidden" name="message" value="Client set-up request">
+          <label>Your name
+            <input name="name" type="text" autocomplete="name" enterkeyhint="next" maxlength="120" required>
+          </label>
+          <label>Work email
+            <input name="email" type="email" inputmode="email" autocomplete="email" enterkeyhint="next" maxlength="254" placeholder="{{email_placeholder}}" required>
+          </label>
+          <label>{{Business}} website
+            <input name="website" type="text" inputmode="url" autocomplete="url" enterkeyhint="next" maxlength="200" placeholder="{{site_placeholder}}" required>
+          </label>
+          <label><span>Primary market <span class="core-form__opt">(optional)</span></span>
+            <input name="market" type="text" autocomplete="address-level2" enterkeyhint="done" maxlength="120" placeholder="City, State">
+          </label>
+          <fieldset class="core-form__choice">
+            <legend>Your focus</legend>
+            <label><input type="radio" name="focus" value="residential" checked> Residential</label>
+            <label><input type="radio" name="focus" value="commercial"> Commercial</label>
+            <label><input type="radio" name="focus" value="both"> Both</label>
+          </fieldset>
+          <div class="core-form__hp" aria-hidden="true"><label>Fax <input name="company_fax" type="text" tabindex="-1" autocomplete="off"></label></div>
+          <button class="btn btn--block" type="submit">Let's get started <span class="arr" aria-hidden="true"></span></button>
+          <p class="core-form__status" role="status" aria-live="polite"></p>
+          <p class="core-form__legal">By submitting, you agree to our <a href="{{terms_href}}">Terms</a> and <a href="{{privacy_href}}">Privacy Policy</a>. We'll never share your details.</p>
+        </form>
+        <div class="core-form__done" hidden>
+          <p class="eyebrow">Received</p>
+          <h3>Thank you. You're on the list.</h3>
+          <p>We'll run your {{business}} through all seven signals and be in touch within one business day to set up your account.</p>
+          <a href="{{report_href}}">Read the industry report while you wait</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  var form = document.currentScript.previousElementSibling.querySelector(".core-form");
+  if (!form || !window.fetch || !window.FormData) return; // without JS the form posts normally and lands on /thank-you/
+  var status = form.querySelector(".core-form__status");
+  var done = form.parentNode.querySelector(".core-form__done");
+  var q = new URLSearchParams(location.search);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var bad = null;
+    ["name", "email", "website"].forEach(function (n) {
+      var el = form.elements[n], v = el.value.trim();
+      var ok = v && (n !== "email" || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v));
+      el.setAttribute("aria-invalid", ok ? "false" : "true");
+      if (!ok && !bad) bad = el;
+    });
+    if (bad) { status.textContent = "Please fill in your name, a valid email and your website."; bad.focus(); return; }
+    if (form.elements.company_fax.value) return;
+    form.elements.page_url.value = location.href;
+    form.elements.referrer.value = document.referrer;
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach(function (k) { form.elements[k].value = q.get(k) || ""; });
+    var btn = form.querySelector("button[type=submit]");
+    btn.disabled = true; status.textContent = "Sending…";
+    fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+      .then(function (r) { return r.json().catch(function () { return { ok: r.ok }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error("failed");
+        form.hidden = true; form.style.display = "none"; done.hidden = false;
+        if (window.gtag) window.gtag("event", "generate_lead", { form: "get-started" });
+      })
+      .catch(function () {
+        btn.disabled = false;
+        status.textContent = "Something went wrong. Please try again, or email hello@7signals.io.";
+      });
+  });
+})();
+</script>
