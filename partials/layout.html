@@ -13,22 +13,15 @@
 <meta property="og:site_name" content="{{brand}}">
 <meta property="og:title" content="{{og_title}}">
 <meta property="og:description" content="{{description}}">
-<meta property="og:url" content="{{site}}{{path}}">
-<meta property="og:image" content="{{site}}{{og_image}}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{{og_image_alt}}">
+<meta property="og:url" content="{{site}}{{path}}">{{og_image_meta}}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{og_title}}">
-<meta name="twitter:description" content="{{description}}">
-<meta name="twitter:image" content="{{site}}{{og_image}}">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="twitter:description" content="{{description}}">{{twitter_image_meta}}
+{{icon_links}}
 {{font_preloads}}
 <link rel="stylesheet" href="{{stylesheet}}?v={{version}}">
 {{schema}}
-{{tracking}}
+{{tracking}}{{head_extra}}
 </head>
 <body class="{{body_class}}">
 <a class="skip-link" href="#main">Skip to content</a>

@@ -55,16 +55,22 @@ WATCHER_CORE_PATH=../watcher-site-core python3 tools/build.py
 | `login_url` | "Log in" links |
 | `mark` | Header logo file and size |
 | `theme_color` | Browser theme colours (light and dark) |
-| `og_image`, `og_image_alt` | Social share image |
+| `og_image`, `og_image_alt` | Social share image. Optional: leave out until the site has one and the image tags are skipped |
+| `icons` | Optional. Favicon links as a list of `{"href", "rel", "type", "sizes"}`. Default: `/favicon.ico`, `/favicon.svg`, `/apple-touch-icon.png` |
+| `head` | Optional. Extra HTML at the end of `<head>` on every page, for example a Google Fonts link |
 | `stylesheet`, `preload_fonts`, `scripts` | The site's own styling and scripts |
 | `tracking` | `uxwizz` (true/false) and `pipelineon_tag` |
 | `nav` | Menu items: `key`, `label`, `href`. A page whose meta `nav` matches a `key` shows that item as current |
 | `cta` | The menu button: `label` (desktop), `label_long` (mobile menu), `href` |
-| `footer` | `blurb`, and `columns`: each column is a list of groups with a `title` and `links`, or `"family": true` for the Watcher family list |
-| `organization` | Structured data on the home page |
+| `footer` | `blurb`, and `columns`: each column is a list of groups with a `title` and `links`, or `"family": true` for the Watcher family list. Optional `legal`: the bottom links as `{"label", "href"}` (default Privacy Policy `/privacy-policy/`, Terms `/terms/`) |
+| `organization` | Structured data on the home page. Optional `logo` path (default `/icon-512.png`) |
+
+## Page meta reference
+
+Each `src/pages/*.html` starts with `<!--meta {...} -->`. Keys: `title`, `description`, `path` (required); `og_title`, `og_type`, `nav`, `robots`, `body_class`, `schema` (list of JSON-LD objects), `priority`, `sitemap` (false to leave the page out), and `head` (extra HTML for this page's `<head>`, such as a hero image preload or a page `<style>` block). Pages whose `robots` contains `noindex` are left out of the sitemap.
 
 ## Roadmap
 
-- **v0.1** (this): shared layout, header, footer, tracking, build and sitemap. Pilot: DecorWatcher.
+- **v0.1**: shared layout, header, footer, tracking, build and sitemap. Pilot: DecorWatcher. v0.1.1 adds the optional settings needed by the second site, FencePostWatcher.
 - **v0.2**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling, forms script and consent banner.
 - **v0.3**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.
