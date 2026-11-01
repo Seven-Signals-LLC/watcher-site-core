@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.4.0 (November 2026)
+
+- Use cases: when a site has `content/use-cases.json`, the core builds `/use-cases/` from it with the same layout on every site (hero, platform proof strip, index, seven use case blocks with example and real-data visuals, closing demo section). The page ships its own scoped CSS and takes the site's colours and fonts from the new optional `core_theme` setting. `docs/use-cases.md` has the format and drafting rules.
+- `defaults.json`: **Use cases** added to the standard menu after Solutions, matching DecorWatcher. Sites without a use-cases page don't show it, and footer links with `"key": "usecases"` are dropped there too.
+- Pilot: FencePostWatcher, which was missing the page. Sites without `content/use-cases.json` and without a footer link keyed `usecases` build exactly as on v0.3.0 (ignoring `?v=` stamps). DecorWatcher keeps its hand-written page.
+
 ## v0.3.0 (November 2026)
 
 - Industry report: when a site has `content/industry-report.json`, the core builds `/industry-report/` from it, with the same layout on every site (contents list, stat strips, charts, tables, funnel, numbered sources, closing demo section). `docs/industry-report.md` has the rules Claude follows to draft that file from the research document in the site's `research/` folder.
