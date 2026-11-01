@@ -19,6 +19,7 @@ import argparse, datetime, html, json, pathlib, re, sys, time
 CORE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(CORE))
 import report  # noqa: E402  (core/report.py: the industry report page)
+import usecases  # noqa: E402  (core/usecases.py: the use cases page)
 META_RE = re.compile(r"^\s*<!--meta\s+(\{.*?\})\s*-->\s*", re.S)
 INCLUDE_RE = re.compile(r"<!--core:([\w-]+)-->\n?")
 
@@ -37,6 +38,15 @@ def load_site(root):
 def href_for(site, item):
     """A site can repoint a standard link by key, e.g. "hrefs": {"report": "/#report"}."""
     return site.get("hrefs", {}).get(item.get("key"), item["href"])
+
+
+def drop_link(site, key):
+    """Remove every menu and footer link with this key (used when the page it points to doesn't exist)."""
+    site["nav"] = [i for i in site["nav"] if i.get("key") != key]
+    for column in site["footer"]["columns"]:
+        for group in column:
+            if "links" in group:
+                group["links"] = [l for l in group["links"] if l.get("key") != key]
 
 
 def render(tpl, ctx):
@@ -215,7 +225,6 @@ def build(root):
         "footer_blurb": site["footer"]["blurb"], "year": datetime.date.today().year,
         "legal_links": "".join(f'<a href="{l["href"]}">{l["label"]}</a>' for l in site["footer"].get("legal", DEFAULT_LEGAL)),
     }
-    footer_html = render(footer, {**common, "footer_columns": footer_columns_html(site)})
     preloads = "\n".join(f'<link rel="preload" href="{f}" as="font" type="font/woff2" crossorigin>' for f in site.get("preload_fonts", []))
     og_meta, twitter_meta = og_image_meta(site, url)
     icons = icon_links(site)
@@ -236,6 +245,18 @@ def build(root):
         if any(name == "industry-report.html" for name, _, _ in pages):
             raise SystemExit("Both content/industry-report.json and src/pages/industry-report.html exist; keep one.")
         pages.append(("industry-report.html", *report.render(report.load(report_json), site)))
+
+    # Use cases: built from content/use-cases.json when the site has one (docs/use-cases.md).
+    uc_json = root / "content/use-cases.json"
+    if uc_json.exists():
+        if any(name == "use-cases.html" for name, _, _ in pages):
+            raise SystemExit("Both content/use-cases.json and src/pages/use-cases.html exist; keep one.")
+        pages.append(("use-cases.html", *usecases.render(usecases.load(uc_json), site)))
+
+    # The standard "Use cases" menu and footer links only show on sites that have the page.
+    if not any(meta["path"] == "/use-cases/" for _, meta, _ in pages) and "usecases" not in site.get("hrefs", {}):
+        drop_link(site, "usecases")
+    footer_html = render(footer, {**common, "footer_columns": footer_columns_html(site)})
 
     sitemap = []
     for name, meta, raw_body in sorted(pages, key=lambda p: p[0]):
