@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.3.0 (November 2026)
+
+- Industry report: when a site has `content/industry-report.json`, the core builds `/industry-report/` from it, with the same layout on every site (contents list, stat strips, charts, tables, funnel, numbered sources, closing demo section). `docs/industry-report.md` has the rules Claude follows to draft that file from the research document in the site's `research/` folder.
+- Pilot: DecorWatcher's report moved from a hand-written page to `content/industry-report.json`; every page builds byte-for-byte the same (ignoring `?v=` stamps). Sites without the file build exactly as on v0.2.1.
+
 ## v0.2.1 (November 2026)
 
 - Every site's **Subscribe** button now goes to one shared Stripe payment link (`pricing.checkout_url` in `defaults.json`), so the checkout is changed in one place. A site can still set its own in `site.json`.
