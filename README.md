@@ -21,6 +21,7 @@ A site repo contains:
 | `core.version` | One line: the core release (for example `v0.1.0`) or commit SHA the site builds with |
 | `site.json` | Brand, menu, button, footer, tracking, stylesheet and fonts. Start from [`templates/site.example.json`](templates/site.example.json) |
 | `tools/build.py` | Copy of [`templates/build.py`](templates/build.py). Downloads the pinned core and runs it |
+| `CLAUDE.md` | Copy of [`templates/CLAUDE.md`](templates/CLAUDE.md). Tells Claude to design the site with the `/hallmark` skill |
 | `src/pages/*.html` | The site's pages. Each starts with a `<!--meta {...} -->` JSON block (title, description, path, nav, schema) |
 | `research/` | Research documents for the industry report. Never published |
 | `content/use-cases.json` | The use cases page's words for this vertical. The core builds `/use-cases/` from it |
@@ -34,11 +35,12 @@ Cloudflare build settings for each site: **build command** `python3 tools/build.
 
 Do these in order. **Cloudflare comes before the merge.** Every push to `main` triggers a production build, so if the build command isn't set when the pull request merges, Cloudflare publishes the CSS and images but no pages.
 
-1. **Put the site files on a branch** and open a pull request against `main`. Upload images and PDFs through the GitHub website (**Add file → Upload files** on that branch).
-2. **Set the Cloudflare build settings** on the site's Worker (Workers & Pages → the site → Settings → Builds): build command `python3 tools/build.py` on both **Production** and **Previews Base**, deploy command `npx wrangler deploy`. Saving the settings doesn't redeploy anything. The current live site stays up.
-3. **Check the preview.** Push a change to the branch, or re-run its preview build, so Cloudflare builds it with the new settings. Open the preview link on the pull request and check the home page, `/industry-report/` and `/contact/`.
-4. **Merge the pull request.** The merge starts the production build, and the domain switches to the new site.
-5. **Add the site to `family.json`** here so the other Watcher footers link to it.
+1. **Design the site with the `/hallmark` skill** (see [CLAUDE.md](CLAUDE.md)), with `templates/CLAUDE.md` copied to the site repo's root. Put the theme Hallmark dealt and its lint result in the pull request description.
+2. **Put the site files on a branch** and open a pull request against `main`. Upload images and PDFs through the GitHub website (**Add file → Upload files** on that branch).
+3. **Set the Cloudflare build settings** on the site's Worker (Workers & Pages → the site → Settings → Builds): build command `python3 tools/build.py` on both **Production** and **Previews Base**, deploy command `npx wrangler deploy`. Saving the settings doesn't redeploy anything. The current live site stays up.
+4. **Check the preview.** Push a change to the branch, or re-run its preview build, so Cloudflare builds it with the new settings. Open the preview link on the pull request and check the home page, `/industry-report/` and `/contact/`.
+5. **Merge the pull request.** The merge starts the production build, and the domain switches to the new site.
+6. **Add the site to `family.json`** here so the other Watcher footers link to it.
 
 ## Updating a site to a newer core
 

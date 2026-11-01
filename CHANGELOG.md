@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Docs only, no build change: new Watcher sites are designed with the `/hallmark` skill. `CLAUDE.md` has the rule, and new site repos copy `templates/CLAUDE.md` so it follows each site.
+
 ## v0.4.0 (November 2026)
 
 - Use cases: when a site has `content/use-cases.json`, the core builds `/use-cases/` from it with the same layout on every site (hero, platform proof strip, index, seven use case blocks with example and real-data visuals, closing demo section). The page ships its own scoped CSS and takes the site's colours and fonts from the new optional `core_theme` setting. `docs/use-cases.md` has the format and drafting rules.
