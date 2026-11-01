@@ -76,12 +76,51 @@ def org_schema(site, url):
         "@type": "Organization",
         "name": org["name"],
         "url": url,
-        "logo": f"{url}/icon-512.png",
+        "logo": url + org.get("logo", "/icon-512.png"),
         "parentOrganization": {"@type": "Organization", "name": "7 Signals LLC", "url": "https://7signals.io"},
         "address": {"@type": "PostalAddress", **org["address"]},
         "email": org["email"],
         "telephone": org["telephone"],
     }
+
+
+DEFAULT_ICONS = [
+    {"href": "/favicon.ico", "sizes": "32x32"},
+    {"href": "/favicon.svg", "type": "image/svg+xml"},
+    {"rel": "apple-touch-icon", "href": "/apple-touch-icon.png"},
+]
+DEFAULT_LEGAL = [
+    {"label": "Privacy Policy", "href": "/privacy-policy/"},
+    {"label": "Terms &amp; Conditions", "href": "/terms/"},
+]
+
+
+def icon_links(site):
+    out = []
+    for i in site.get("icons", DEFAULT_ICONS):
+        attrs = f' href="{i["href"]}"'
+        attrs += f' sizes="{i["sizes"]}"' if i.get("sizes") else ""
+        attrs += f' type="{i["type"]}"' if i.get("type") else ""
+        out.append(f'<link rel="{i.get("rel", "icon")}"{attrs}>')
+    return "\n".join(out)
+
+
+def og_image_meta(site, url):
+    """Social image tags. Left out when the site has no og_image yet."""
+    if not site.get("og_image"):
+        return "", ""
+    img = f"{url}{site['og_image']}"
+    alt = html.escape(site.get("og_image_alt", site["brand"]), quote=True)
+    og = (f'\n<meta property="og:image" content="{img}">'
+          '\n<meta property="og:image:width" content="1200">'
+          '\n<meta property="og:image:height" content="630">'
+          f'\n<meta property="og:image:alt" content="{alt}">')
+    return og, f'\n<meta name="twitter:image" content="{img}">'
+
+
+def head_extra(*parts):
+    """Raw HTML added at the end of <head>: the site's first, then the page's own."""
+    return "".join("\n" + p.strip() for p in parts if p and p.strip())
 
 
 def tracking_html(site):
@@ -118,9 +157,12 @@ def build(root):
         "cta_href": cta["href"], "cta_rel": rel_for(cta["href"]),
         "cta_label": cta["label"], "cta_label_long": cta.get("label_long", cta["label"]),
         "footer_blurb": site["footer"]["blurb"], "year": datetime.date.today().year,
+        "legal_links": "".join(f'<a href="{l["href"]}">{l["label"]}</a>' for l in site["footer"].get("legal", DEFAULT_LEGAL)),
     }
     footer_html = render(footer, {**common, "footer_columns": footer_columns_html(site)})
     preloads = "\n".join(f'<link rel="preload" href="{f}" as="font" type="font/woff2" crossorigin>' for f in site.get("preload_fonts", []))
+    og_meta, twitter_meta = og_image_meta(site, url)
+    icons = icon_links(site)
     scripts = "\n".join(f'<script src="{s["src"]}?v={version}"{" defer" if s.get("defer") else ""}></script>' for s in site.get("scripts", []))
 
     sitemap = []
@@ -142,7 +184,8 @@ def build(root):
             "og_title": meta.get("og_title", meta["title"]), "og_type": meta.get("og_type", "website"),
             "robots": meta.get("robots", "index, follow"), "site": url, "path": path,
             "theme_light": site["theme_color"]["light"], "theme_dark": site["theme_color"]["dark"],
-            "og_image": site["og_image"], "og_image_alt": html.escape(site["og_image_alt"], quote=True),
+            "og_image_meta": og_meta, "twitter_image_meta": twitter_meta, "icon_links": icons,
+            "head_extra": head_extra(site.get("head", ""), meta.get("head", "")),
             "font_preloads": preloads, "stylesheet": site["stylesheet"], "version": version,
             "schema": schema_html, "tracking": tracking_html(site), "scripts": scripts,
             "body_class": meta.get("body_class", ""),

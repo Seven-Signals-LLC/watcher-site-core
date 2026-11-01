@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.1 (November 2026)
+
+Optional settings found while moving FencePostWatcher onto the core. Sites that don't use them build exactly as before (DecorWatcher-style sample checked byte-for-byte, ignoring `?v=` stamps).
+
+- `site.json`: `head` (extra head HTML on every page), `icons` (favicon links), `footer.legal` (bottom links), `organization.logo`.
+- `og_image` is now optional; without it the social image tags are left out.
+- Page meta: `head` for page-only head HTML (preloads, page styles).
+
 ## v0.1.0 (November 2026)
 
 First release, extracted from the DecorWatcher site.
