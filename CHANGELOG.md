@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.2.0 (November 2026)
+
+The DecorWatcher menu, demo wording and pricing become the shared standard, so every Watcher site says the same thing. Pilot: FencePostWatcher.
+
+- `defaults.json`: standard menu (Why Us, The Signals, Solutions, Industry Report, Pricing, Contact), **Try the demo** button, login, demo and lead Worker links, and the default `words` and `pricing`. A site's own `site.json` keys still win.
+- Shared sections a page pulls in with a marker: `<!--core:demo-button-->`, `<!--core:demo-trust-->`, `<!--core:demo-ps-->`, `<!--core:get-started-->` (client set-up form → watcher-leads Worker) and `<!--core:pricing-->`.
+- `hrefs` in `site.json` repoints a standard link by key (for example the industry report).
+- Sites that set their own `nav`, `cta` and `login_url` and use no markers build exactly as on v0.1.1 (checked on the sample site and FencePostWatcher).
+
 ## v0.1.1 (November 2026)
 
 Optional settings found while moving FencePostWatcher onto the core. Sites that don't use them build exactly as before (DecorWatcher-style sample checked byte-for-byte, ignoring `?v=` stamps).
