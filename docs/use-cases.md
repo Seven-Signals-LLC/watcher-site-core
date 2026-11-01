@@ -16,9 +16,12 @@ The page carries its own CSS (`partials/use-cases.css`, scoped to `.core-uc`). I
   "text": "var(--text)", "muted": "var(--muted)", "ink": "var(--ink)",
   "accent": "var(--copper)", "accent_text": "#fff", "good": "var(--signal-dk)", "bad": "#b4483a",
   "dark": "var(--slate)", "on_dark": "#e6ece8", "dark_muted": "#a9b8b0",
-  "serif": "var(--serif)", "sans": "var(--sans)", "mono": "var(--mono)", "radius": "var(--radius)"
+  "serif": "var(--serif)", "sans": "var(--sans)", "mono": "var(--mono)", "radius": "var(--radius)",
+  "button": "var(--green)", "button_text": "var(--green-ink)"
 }
 ```
+
+`button` and `button_text` are optional: the closing button uses `accent` / `accent_text` unless the site's buttons are a different colour from its accent.
 
 ## Instructions for Claude: drafting content/use-cases.json
 

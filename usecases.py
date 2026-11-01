@@ -18,6 +18,7 @@ THEME_VARS = {
     "accent": "--uc-accent", "accent_text": "--uc-accent-text", "good": "--uc-good", "bad": "--uc-bad",
     "dark": "--uc-dark", "on_dark": "--uc-on-dark", "dark_muted": "--uc-dark-muted",
     "serif": "--uc-serif", "sans": "--uc-sans", "mono": "--uc-mono", "radius": "--uc-radius",
+    "button": "--uc-button", "button_text": "--uc-button-text",
 }
 
 
