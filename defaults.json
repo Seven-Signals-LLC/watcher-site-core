@@ -24,7 +24,7 @@
     "price": "$149",
     "price_note": "per month, cancel anytime",
     "checkout_label": "Subscribe for $149/mo",
-    "checkout_url": "",
+    "checkout_url": "https://buy.stripe.com/00w00i5eC6SraCgdyXbII09",
     "plan_items": [
       "Your full {{brand}} dashboard",
       "All seven signals, refreshed weekly",

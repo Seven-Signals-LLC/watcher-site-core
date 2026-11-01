@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1 (November 2026)
+
+- Every site's **Subscribe** button now goes to one shared Stripe payment link (`pricing.checkout_url` in `defaults.json`), so the checkout is changed in one place. A site can still set its own in `site.json`.
+
 ## v0.2.0 (November 2026)
 
 The DecorWatcher menu, demo wording and pricing become the shared standard, so every Watcher site says the same thing. Pilot: FencePostWatcher.
