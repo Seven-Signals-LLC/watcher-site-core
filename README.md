@@ -28,7 +28,17 @@ A site repo contains:
 | `src/partials/mark-light.html` | Optional: the logo mark for the dark footer. Without it, the header logo is reused |
 | `public/` | Static files (css, js, images, fonts). Built HTML is written here |
 
-Cloudflare build settings for each site: **build command** `python3 tools/build.py`, **deploy command** `npx wrangler deploy`.
+Cloudflare build settings for each site: **build command** `python3 tools/build.py`, **deploy command** `npx wrangler deploy`. Set the build command on **both** tabs under Settings → Builds: **Production** and **Previews Base**.
+
+## Launching a new site (or moving a site onto the core)
+
+Do these in order. **Cloudflare comes before the merge.** Every push to `main` triggers a production build, so if the build command isn't set when the pull request merges, Cloudflare publishes the CSS and images but no pages.
+
+1. **Put the site files on a branch** and open a pull request against `main`. Upload images and PDFs through the GitHub website (**Add file → Upload files** on that branch).
+2. **Set the Cloudflare build settings** on the site's Worker (Workers & Pages → the site → Settings → Builds): build command `python3 tools/build.py` on both **Production** and **Previews Base**, deploy command `npx wrangler deploy`. Saving the settings doesn't redeploy anything. The current live site stays up.
+3. **Check the preview.** Push a change to the branch, or re-run its preview build, so Cloudflare builds it with the new settings. Open the preview link on the pull request and check the home page, `/industry-report/` and `/contact/`.
+4. **Merge the pull request.** The merge starts the production build, and the domain switches to the new site.
+5. **Add the site to `family.json`** here so the other Watcher footers link to it.
 
 ## Updating a site to a newer core
 
