@@ -1,2 +1,70 @@
 # watcher-site-core
-Shared framework for every Watcher marketing site: layout, menu, footer, tracking and build. Each site keeps its own look and content.
+
+The shared framework for every **Watcher** marketing site by 7 Signals (DecorWatcher, GarageWatcher, PlumbWatcher and the rest). It holds the parts that should be the same on every site, so a change made here reaches all of them:
+
+- the page layout: head tags, social cards, canonical URL, structured data
+- the header, menu, mobile menu and "Try the demo" button
+- the footer, including the Watcher family links (`family.json`)
+- tracking (UXWizz, PipelineOn), set per site in `site.json`
+- the build script and `sitemap.xml`
+
+Each site keeps its own **look** (stylesheet, fonts, logo), **pages** and **content** in its own repo. This repo holds no secrets, customer data or market numbers, which is why it can be public.
+
+## How a site uses it
+
+A site repo contains:
+
+| File | What it is |
+|---|---|
+| `core.version` | One line: the core release (for example `v0.1.0`) or commit SHA the site builds with |
+| `site.json` | Brand, menu, button, footer, tracking, stylesheet and fonts. Start from [`templates/site.example.json`](templates/site.example.json) |
+| `tools/build.py` | Copy of [`templates/build.py`](templates/build.py). Downloads the pinned core and runs it |
+| `src/pages/*.html` | The site's pages. Each starts with a `<!--meta {...} -->` JSON block (title, description, path, nav, schema) |
+| `src/partials/mark-light.html` | Optional: the logo mark for the dark footer. Without it, the header logo is reused |
+| `public/` | Static files (css, js, images, fonts). Built HTML is written here |
+
+Cloudflare build settings for each site: **build command** `python3 tools/build.py`, **deploy command** `npx wrangler deploy`.
+
+## Updating a site to a newer core
+
+1. A new core version is released here (see below).
+2. In the site repo, change `core.version` to the new version and open a pull request.
+3. Check the Cloudflare preview link on the pull request, then merge.
+
+Sites stay on their pinned version until someone changes that line, so one core change can never break every site at once. Update one site first, check it, then the rest.
+
+## Releasing a new core version
+
+1. Merge the change into `main` here through a pull request.
+2. On GitHub: **Releases → Draft a new release → Choose a tag**, type the next version (for example `v0.2.0`), **Create new tag**, add a line on what changed, **Publish release**.
+3. Add the change to `CHANGELOG.md`.
+
+## Working on the core locally
+
+```bash
+# from a site repo, build against a local checkout of this repo
+WATCHER_CORE_PATH=../watcher-site-core python3 tools/build.py
+```
+
+## site.json reference
+
+| Key | Used for |
+|---|---|
+| `brand`, `brand_prefix` | Name in titles and social cards; the logo word renders as `{prefix}<i>Watcher</i>` |
+| `site_url` | Canonical URLs, sitemap, structured data |
+| `login_url` | "Log in" links |
+| `mark` | Header logo file and size |
+| `theme_color` | Browser theme colours (light and dark) |
+| `og_image`, `og_image_alt` | Social share image |
+| `stylesheet`, `preload_fonts`, `scripts` | The site's own styling and scripts |
+| `tracking` | `uxwizz` (true/false) and `pipelineon_tag` |
+| `nav` | Menu items: `key`, `label`, `href`. A page whose meta `nav` matches a `key` shows that item as current |
+| `cta` | The menu button: `label` (desktop), `label_long` (mobile menu), `href` |
+| `footer` | `blurb`, and `columns`: each column is a list of groups with a `title` and `links`, or `"family": true` for the Watcher family list |
+| `organization` | Structured data on the home page |
+
+## Roadmap
+
+- **v0.1** (this): shared layout, header, footer, tracking, build and sitemap. Pilot: DecorWatcher.
+- **v0.2**: automatic "Update core" pull requests in every site repo when a version is released; shared base styling, forms script and consent banner.
+- **v0.3**: shared standard pages (use cases, contact, thank-you, privacy, terms, 404) driven by each site's words and data.

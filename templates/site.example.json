@@ -1,0 +1,62 @@
+{
+  "brand": "DecorWatcher",
+  "brand_prefix": "Decor",
+  "site_url": "https://decorwatcher.com",
+  "login_url": "https://gcpwatcher.com/user_reg/login.php",
+  "mark": {"src": "/assets/img/mark.svg", "width": 26, "height": 34},
+  "theme_color": {"light": "#F4F0E9", "dark": "#1E1A17"},
+  "og_image": "/assets/img/og-decorwatcher.jpg",
+  "og_image_alt": "DecorWatcher — competitive intelligence for interior designers",
+  "stylesheet": "/assets/css/decor.css",
+  "preload_fonts": [
+    "/assets/fonts/instrument-serif-latin-400-normal.woff2",
+    "/assets/fonts/instrument-serif-latin-400-italic.woff2",
+    "/assets/fonts/instrument-sans-latin-wght-normal.woff2"
+  ],
+  "scripts": [
+    {"src": "/assets/js/config.js"},
+    {"src": "/assets/js/decor.js", "defer": true}
+  ],
+  "tracking": {"uxwizz": true, "pipelineon_tag": "edbef886b6807625fc148ad535c7bda6"},
+  "nav": [
+    {"key": "why", "label": "Why Us", "href": "/#why"},
+    {"key": "signals", "label": "The Signals", "href": "/#signals"},
+    {"key": "solutions", "label": "Solutions", "href": "/#solutions"},
+    {"key": "usecases", "label": "Use cases", "href": "/use-cases/"},
+    {"key": "report", "label": "Industry Report", "href": "/industry-report/"},
+    {"key": "pricing", "label": "Pricing", "href": "/#pricing"},
+    {"key": "contact", "label": "Contact", "href": "/contact/"}
+  ],
+  "cta": {"label": "Try the demo", "label_long": "See the demo for free", "href": "https://signalstogrowth.com/"},
+  "footer": {
+    "blurb": "Competitive intelligence for interior designers. Know how affluent clients see your studio, and what to refine first.",
+    "columns": [
+      [{"title": "Explore", "links": [
+        {"label": "Why Us", "href": "/#why"},
+        {"label": "The Seven Signals", "href": "/#signals"},
+        {"label": "Solutions", "href": "/#solutions"},
+        {"label": "Use cases", "href": "/use-cases/"},
+        {"label": "Pricing", "href": "/#pricing"},
+        {"label": "FAQ", "href": "/#faq"}
+      ]}],
+      [{"title": "Resources", "links": [
+        {"label": "2026 Industry Report", "href": "/industry-report/"},
+        {"label": "Free demo", "href": "https://signalstogrowth.com/"},
+        {"label": "Contact", "href": "/contact/"}
+       ]},
+       {"title": "The Watcher family", "family": true}],
+      [{"title": "Studio", "links": [
+        {"text": "Mt. Pleasant, SC 29466"},
+        {"label": "+1 (843) 212-6898", "href": "tel:+18432126898"},
+        {"label": "hello@7signals.io", "href": "mailto:hello@7signals.io"},
+        {"label": "LinkedIn", "href": "https://www.linkedin.com/company/7signals"}
+      ]}]
+    ]
+  },
+  "organization": {
+    "name": "DecorWatcher by 7 Signals",
+    "address": {"addressLocality": "Mt. Pleasant", "addressRegion": "SC", "postalCode": "29466", "addressCountry": "US"},
+    "email": "hello@7signals.io",
+    "telephone": "+1-843-212-6898"
+  }
+}

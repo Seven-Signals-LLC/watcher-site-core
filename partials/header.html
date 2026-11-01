@@ -1,0 +1,25 @@
+<header class="site-header">
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="/" aria-label="{{brand}} by 7 Signals — home">
+        <img class="brand__mark" src="{{mark_src}}" alt="" width="{{mark_width}}" height="{{mark_height}}">
+        <span><span class="brand__word">{{brand_word}}</span><span class="brand__by">by 7 Signals</span></span>
+      </a>
+      <ul class="nav__links">
+{{nav_links}}
+      </ul>
+      <div class="nav__cta">
+        <a class="nav__login" href="{{login_url}}">Log in</a>
+        <a class="btn" href="{{cta_href}}"{{cta_rel}}>{{cta_label}} <span class="arr" aria-hidden="true"></span></a>
+        <button type="button" class="menu-btn" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu"><span></span><span></span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="mobile-nav" id="mobile-nav">
+  <ol>
+{{mobile_links}}
+  </ol>
+  <a class="btn btn--block" href="{{cta_href}}"{{cta_rel}}>{{cta_label_long}} <span class="arr" aria-hidden="true"></span></a>
+  <a class="nav__login" href="{{login_url}}">Log in</a>
+</div>
