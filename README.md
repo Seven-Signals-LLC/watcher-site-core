@@ -75,7 +75,7 @@ Every site starts from `defaults.json`, the DecorWatcher standard. Anything a si
 | `cta` | **Try the demo** (mobile menu: **See the demo for free**) → the Watcher demo |
 | `login_url`, `demo_url`, `lead_endpoint` | Watcher login, the demo, the shared watcher-leads Worker |
 | `words` | The site's nouns for the shared sections: `business`, `businesses`, `Business`, `payoff`, `email_placeholder`, `site_placeholder` |
-| `pricing` | `plan_name`, `price`, `price_note`, `checkout_label`, `checkout_url` (Stripe link; without it the button goes to `/contact/?plan=subscription`), `plan_items`, `custom_items` |
+| `pricing` | `plan_name`, `price`, `price_note`, `checkout_label`, `checkout_url` (the shared Stripe payment link every site's **Subscribe** button uses; change it here to update all sites, or set it in a site's `site.json` to give that site its own), `plan_items`, `custom_items` |
 
 `words` and `pricing` merge entry by entry, so `"pricing": {"plan_name": "Contractor"}` changes only the plan name.
 
