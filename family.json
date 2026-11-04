@@ -1,7 +1,8 @@
 [
-  {"brand": "ShadeWatcher",  "url": "https://shadewatcher.com"},
-  {"brand": "MediusWatcher", "url": "https://mediuswatcher.com"},
-  {"brand": "GarageWatcher", "url": "https://garagewatcher.com"},
-  {"brand": "DecorWatcher",  "url": "https://decorwatcher.com"},
-  {"brand": "GroutWatcher",  "url": "https://groutwatcher.com"}
+  {"brand": "ShadeWatcher",     "url": "https://shadewatcher.com"},
+  {"brand": "MediusWatcher",    "url": "https://mediuswatcher.com"},
+  {"brand": "GarageWatcher",    "url": "https://garagewatcher.com"},
+  {"brand": "DecorWatcher",     "url": "https://decorwatcher.com"},
+  {"brand": "FencePostWatcher", "url": "https://fencepostwatcher.com"},
+  {"brand": "GroutWatcher",     "url": "https://groutwatcher.com"}
 ]
