@@ -20,6 +20,7 @@ CORE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(CORE))
 import report  # noqa: E402  (core/report.py: the industry report page)
 import usecases  # noqa: E402  (core/usecases.py: the use cases page)
+import hero  # noqa: E402  (core/hero.py: the standard home page hero)
 META_RE = re.compile(r"^\s*<!--meta\s+(\{.*?\})\s*-->\s*", re.S)
 INCLUDE_RE = re.compile(r"<!--core:([\w-]+)-->\n?")
 
@@ -260,6 +261,13 @@ def build(root):
 
     sitemap = []
     for name, meta, raw_body in sorted(pages, key=lambda p: p[0]):
+        page_head = meta.get("head", "")
+        if hero.MARKER in raw_body:
+            # Standard hero (docs/hero.md): needs a "hero" block in site.json.
+            if "hero" not in site:
+                raise SystemExit(f"{name}: <!--core:hero--> needs a \"hero\" block in site.json (see docs/hero.md)")
+            raw_body = re.sub(re.escape(hero.MARKER) + r"\n?", lambda _m: hero.render(site, root), raw_body)
+            page_head = head_extra(page_head, hero.head(site)).lstrip("\n")
         body = expand_includes(raw_body, sections, name)
         path = meta["path"]
         nav_links, mobile_links = nav_html(site, meta.get("nav", ""))
@@ -273,7 +281,7 @@ def build(root):
             "robots": meta.get("robots", "index, follow"), "site": url, "path": path,
             "theme_light": site["theme_color"]["light"], "theme_dark": site["theme_color"]["dark"],
             "og_image_meta": og_meta, "twitter_image_meta": twitter_meta, "icon_links": icons,
-            "head_extra": head_extra(site.get("head", ""), meta.get("head", "")),
+            "head_extra": head_extra(site.get("head", ""), page_head),
             "font_preloads": preloads, "stylesheet": site["stylesheet"], "version": version,
             "schema": schema_html, "tracking": tracking_html(site), "scripts": scripts,
             "body_class": meta.get("body_class", ""),
