@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Docs only, no build change: new Watcher sites are designed with the `/hallmark` skill. `CLAUDE.md` has the rule, and new site repos copy `templates/CLAUDE.md` so it follows each site.
+- `family.json`: GroutWatcher (groutwatcher.com) added to the Watcher family footer list. Other sites pick it up when they move to the next core version; GroutWatcher never lists itself.
 
 ## v0.4.0 (November 2026)
 
