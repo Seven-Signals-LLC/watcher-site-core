@@ -8,6 +8,7 @@ Before you design or build anything for this site (a new site, a new page, a new
 
 - It applies to what this repo owns: `public/` styles and assets, `src/pages/*.html` and `src/partials/`. Don't restyle or work around core-built markup to satisfy it; if its lint flags core output, note it in the pull request.
 - Run its lint on the built `public/` pages before opening a pull request, and list the theme and the lint result in the pull request description.
+- The home page opens with the core's standard hero, `<!--core:hero-->` (full-bleed photo, ink scrim, headline low-left; see watcher-site-core `docs/hero.md`). Keep it, stamp `hero: Poster (core standard)`, and design the rest of the page with Hallmark.
 - Never invent metrics, testimonials, logos or customer counts.
 - If the `/hallmark` skill isn't available in your session, stop and say so instead of designing without it.
 

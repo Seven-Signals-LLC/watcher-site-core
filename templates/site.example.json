@@ -7,6 +7,18 @@
   "theme_color": {"light": "#F4F0E9", "dark": "#1E1A17"},
   "og_image": "/assets/img/og-decorwatcher.jpg",
   "og_image_alt": "DecorWatcher — competitive intelligence for interior designers",
+  "hero": {
+    "title": "Headline in the trade's own words.",
+    "lead": "One sentence on what the site does, for whom.",
+    "image": {
+      "src": "/assets/img/hero-1600.webp",
+      "srcset": [{"src": "/assets/img/hero-960.webp", "w": 960}, {"src": "/assets/img/hero-1600.webp", "w": 1600}, {"src": "/assets/img/hero-2400.webp", "w": 2400}],
+      "width": 2400, "height": 1340,
+      "alt": "What the photo shows",
+      "position": "70% 50%"
+    },
+    "secondary": {"label": "See the seven signals", "href": "#signals"}
+  },
   "stylesheet": "/assets/css/decor.css",
   "preload_fonts": [
     "/assets/fonts/instrument-serif-latin-400-normal.woff2",
