@@ -1,0 +1,16 @@
+.core-hero{--ch-dark:#141210;--ch-on-dark:#f4f1ea;--ch-on-dark-muted:#d9d4ca;--ch-accent:#b4532a;--ch-display:inherit;--ch-sans:inherit;--ch-header:74px;position:relative;isolation:isolate;display:grid;align-items:end;min-height:calc(100svh - var(--ch-header));padding-block:clamp(56px,7vw,96px);overflow:hidden;background:var(--ch-dark);color:var(--ch-on-dark)}
+.core-hero__photo{position:absolute;inset:0;z-index:0;margin:0}
+.core-hero__photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.core-hero__scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,color-mix(in oklab,var(--ch-dark) 88%,transparent) 0%,color-mix(in oklab,var(--ch-dark) 62%,transparent) 42%,transparent 72%),linear-gradient(0deg,color-mix(in oklab,var(--ch-dark) 55%,transparent) 0%,transparent 40%)}
+.core-hero__grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:end}
+.core-hero h1{margin:0;max-width:12ch;font-family:var(--ch-display);font-size:clamp(2.75rem,4.4vw + .75rem,5rem);line-height:1.02;letter-spacing:-.025em;color:var(--ch-on-dark);overflow-wrap:break-word;min-width:0;text-wrap:balance}
+.core-hero__lead{margin:24px 0 0;max-width:34ch;font-family:var(--ch-sans);font-size:clamp(1.125rem,.35vw + 1rem,1.375rem);line-height:1.45;color:var(--ch-on-dark-muted);text-wrap:pretty}
+.core-hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.core-hero .btn{background:var(--ch-on-dark);color:var(--ch-dark);border-color:var(--ch-on-dark)}
+.core-hero .btn:hover{background:var(--ch-on-dark-muted);border-color:var(--ch-on-dark-muted)}
+.core-hero .btn--ghost{background:transparent;color:var(--ch-on-dark);border-color:var(--ch-on-dark)}
+.core-hero .btn--ghost:hover{background:color-mix(in oklab,var(--ch-on-dark) 14%,transparent)}
+.core-hero .btn:focus-visible{outline:2px solid var(--ch-on-dark);outline-offset:3px}
+.core-hero .demo-trust{color:var(--ch-on-dark-muted)}
+.core-hero__aside{justify-self:end;width:min(100%,25rem)}
+@media (max-width:60rem){.core-hero{padding-block:56px}.core-hero__scrim{background:linear-gradient(0deg,color-mix(in oklab,var(--ch-dark) 92%,transparent) 0%,color-mix(in oklab,var(--ch-dark) 70%,transparent) 55%,color-mix(in oklab,var(--ch-dark) 25%,transparent) 100%)}.core-hero__grid{grid-template-columns:minmax(0,1fr)}.core-hero__aside{justify-self:stretch;width:auto}}

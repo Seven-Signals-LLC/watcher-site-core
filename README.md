@@ -9,6 +9,7 @@ The shared framework for every **Watcher** marketing site by 7 Signals (DecorWat
 - the build script and `sitemap.xml`
 - the industry report at `/industry-report/`, built from each vertical's research document (see [docs/industry-report.md](docs/industry-report.md))
 - the use cases page at `/use-cases/`, built from each site's `content/use-cases.json` (see [docs/use-cases.md](docs/use-cases.md))
+- the standard home page hero, `<!--core:hero-->` (see [docs/hero.md](docs/hero.md))
 
 Each site keeps its own **look** (stylesheet, fonts, logo), **pages** and **content** in its own repo. This repo holds no secrets, customer data or market numbers, which is why it can be public.
 
@@ -27,6 +28,7 @@ A site repo contains:
 | `content/use-cases.json` | The use cases page's words for this vertical. The core builds `/use-cases/` from it |
 | `content/industry-report.json` | The industry report's content, drafted from `research/` by Claude and reviewed in a pull request. The core builds `/industry-report/` from it |
 | `src/partials/mark-light.html` | Optional: the logo mark for the dark footer. Without it, the header logo is reused |
+| `src/partials/hero-aside.html` | Optional: a card the standard hero places on its photo (see [docs/hero.md](docs/hero.md)) |
 | `public/` | Static files (css, js, images, fonts). Built HTML is written here |
 
 Cloudflare build settings for each site: **build command** `python3 tools/build.py`, **deploy command** `npx wrangler deploy`. Set the build command on **both** tabs under Settings → Builds: **Production** and **Previews Base**.
@@ -80,7 +82,8 @@ WATCHER_CORE_PATH=../watcher-site-core python3 tools/build.py
 | `nav` | Menu items: `key`, `label`, `href`. A page whose meta `nav` matches a `key` shows that item as current |
 | `cta` | The menu button: `label` (desktop), `label_long` (mobile menu), `href` |
 | `footer` | `blurb`, and `columns`: each column is a list of groups with a `title` and `links`, or `"family": true` for the Watcher family list. Optional `legal`: the bottom links as `{"label", "href"}` (default Privacy Policy `/privacy-policy/`, Terms `/terms/`) |
-| `core_theme` | Optional. Maps the site's colours and fonts onto core-styled pages such as `/use-cases/` (see [docs/use-cases.md](docs/use-cases.md)) |
+| `hero` | Optional. The standard home page hero's headline, line, photo and second button, for `<!--core:hero-->` (see [docs/hero.md](docs/hero.md)) |
+| `core_theme` | Optional. Maps the site's colours and fonts onto core-styled sections and pages: the standard hero and `/use-cases/` (see [docs/hero.md](docs/hero.md) and [docs/use-cases.md](docs/use-cases.md)) |
 | `organization` | Structured data on the home page. Optional `logo` path (default `/icon-512.png`) |
 
 ## Shared defaults (`defaults.json`)
@@ -105,13 +108,14 @@ Put a marker in a page and the build swaps in the shared section from `partials/
 
 | Marker | What it is |
 |---|---|
+| `<!--core:hero-->` | The standard home page hero: full-bleed photo, ink scrim, headline, demo button and trust line, built from `hero` in `site.json` (see [docs/hero.md](docs/hero.md)). New sites open their home page with it |
 | `<!--core:demo-button-->` | "See the demo for free" button (`.btn.btn--demo`) |
 | `<!--core:demo-trust-->` | 5-minute demo · No credit card · No client data needed (`.demo-trust`) |
 | `<!--core:demo-ps-->` | "P.S. The demo is free…" line (`.demo-ps`) |
 | `<!--core:get-started-->` | "I want to get started" section with the client set-up form, posting to the watcher-leads Worker (works without JavaScript too; lands on `/thank-you/`) |
 | `<!--core:pricing-->` | Pricing: free demo, subscription plan, custom services |
 
-The wording lives here so it changes once for every site. Each site styles the section classes (`core-pricing`, `plan`, `core-start`, `core-form`, …) in its own stylesheet.
+The wording lives here so it changes once for every site. Each site styles the section classes (`core-pricing`, `plan`, `core-start`, `core-form`, …) in its own stylesheet. The standard hero is the exception: it ships its own styles (`partials/hero.css`), coloured through `core_theme`.
 
 ## Page meta reference
 
