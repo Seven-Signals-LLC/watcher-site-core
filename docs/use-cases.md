@@ -22,7 +22,10 @@ The page carries its own CSS (`partials/use-cases.css`, scoped to `.core-uc`). I
 
 ## Instructions for Claude: drafting content/use-cases.json
 
-Start from an existing site's file (FencePostWatcher's is the reference) and rewrite it for the vertical in `site.json`.
+Start from [`templates/use-cases.example.json`](../templates/use-cases.example.json) and rewrite it for the vertical in `site.json`. Its words are FencePostWatcher's, as a worked example, and every visual in it is an example with fictional competitors.
+
+- **Real numbers stay out of this repo.** It is public, so the template carries no Watcher database figures. Each case's `_real_visuals` shows the shape of a real-data visual with its numbers set to `null`, and `_proof` does the same for the proof strip. Fill them in the site repo only, from that vertical's own Watcher data, then move them into `visuals` (or rename `_proof` to `proof`). Keys starting with `_` are ignored by the build, so a site copied straight from the template builds with example visuals only.
+- **No data for the vertical yet?** Leave `_real_visuals` and `_proof` as they are. Don't relabel another vertical's numbers as this one's.
 
 - Keep the seven cases, their order, ids and `signals`. Rewrite `intro`, `question`, `outcome`, `steps` and the example visuals in the vertical's own words (homeowners vs. patients vs. clients; estimates vs. appointments; crews vs. staff).
 - **Example** visuals (`"tag": "example"`) use fictional competitors and plausible numbers. The closing `fine` line must say so.

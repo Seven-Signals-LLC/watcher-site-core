@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Use cases: new `templates/use-cases.example.json` as the starting point for a site's `content/use-cases.json`, replacing "start from FencePostWatcher's file" in `docs/use-cases.md`. It keeps FencePostWatcher's words as a worked example with example visuals only; real-data visuals and the proof strip are kept as `_real_visuals` and `_proof` shapes with null numbers, so no Watcher figures enter this public repo. No build change.
 - Standard home page hero: `<!--core:hero-->` builds a full-bleed photo hero (ink scrim, headline low-left, demo button and trust line) from a new optional `hero` block in `site.json`, with an optional card from `src/partials/hero-aside.html`. Styles ship with the section (`partials/hero.css`, scoped to `.core-hero`) and take the site's colours and fonts from `core_theme`; the photo is preloaded in the page head. `docs/hero.md` has the details, and `templates/CLAUDE.md` makes it the default for new sites. Pilot: GroutWatcher. Pages without the marker build exactly as before (GroutWatcher checked byte-for-byte, ignoring `?v=` stamps).
 - Docs only, no build change: new Watcher sites are designed with the `/hallmark` skill. `CLAUDE.md` has the rule, and new site repos copy `templates/CLAUDE.md` so it follows each site.
 - `family.json`: FencePostWatcher (fencepostwatcher.com) and GroutWatcher (groutwatcher.com) added to the Watcher family footer list. Other sites pick them up when they move to the next core version; a site never lists itself.
