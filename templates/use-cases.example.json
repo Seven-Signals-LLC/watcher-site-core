@@ -1,0 +1,668 @@
+{
+  "_readme": "Starting point for a site's content/use-cases.json (docs/use-cases.md). The words are FencePostWatcher's, as a worked example: rewrite them for your vertical. Every visual here is an example with fictional competitors. Real Watcher numbers never go in this public repo: each case's _real_visuals shows the shape of a real-data visual, with its numbers left null. Copy one into that case's visuals only with numbers from your vertical's Watcher database, and say which market they come from in its note. Keys starting with _ are ignored by the build.",
+  "meta": {
+    "title": "Seven Ways to Win | FencePostWatcher",
+    "og_title": "Seven ways fence contractors use FencePostWatcher",
+    "description": "Seven plays fence contractors run with FencePostWatcher data: where to expand, how to sell against a rival, what to say in ads, how fast to answer, and which pages to build next.",
+    "path": "/use-cases/",
+    "nav": "usecases",
+    "priority": "0.8"
+  },
+  "hero": {
+    "eyebrow": "Use cases · Beyond the dashboard",
+    "title": "Your market data is a <em>playbook.</em> Here are seven ways to run it.",
+    "lede": "The dashboard tells you where you rank. These use cases show what fence contractors do next with the same data: where to add crews, how to sell against a rival, what to put in an ad, how fast to answer, and what to write on your website."
+  },
+  "_proof": {
+    "title": "What the Watcher platform tracks",
+    "stats": [
+      {
+        "value": null,
+        "label": "local businesses scored"
+      },
+      {
+        "value": null,
+        "label": "customer reviews read"
+      },
+      {
+        "value": null,
+        "label": "review themes extracted"
+      }
+    ],
+    "note": "Say which Watcher databases the totals combine, and the month. Rename this key to proof once the numbers are filled from the database."
+  },
+  "cases": [
+    {
+      "id": "expansion",
+      "short": "Expansion map",
+      "kicker": "Growth",
+      "title": "Expansion map",
+      "intro": "See how strong or weak the competition is in every part of your region before you send a crew, open a yard, or spend a dollar on a new service area.",
+      "question": "Where can we grow with the least resistance?",
+      "outcome": "A territory map scored by competitor strength, with the open ground flagged: ZIP codes with fence demand and few fence companies scoring above average.",
+      "steps": [
+        "Filter the map to areas within a realistic drive for your install crews.",
+        "Shortlist zones where no rival scores in the top tier on reviews and local SEO.",
+        "Point a test ad budget and one landing page at the best two zones for 60 days."
+      ],
+      "signals": [
+        "Composite score",
+        "Proximity",
+        "Review volume",
+        "Domain authority",
+        "Market rank"
+      ],
+      "visuals": [
+        {
+          "type": "heatmap",
+          "title": "Competitive pressure by area",
+          "tag": "example",
+          "alt": "Example grid of service areas shaded by competitor strength, with open ground and your location marked",
+          "grid": [
+            [
+              1,
+              2,
+              3,
+              4,
+              3,
+              2,
+              1,
+              0
+            ],
+            [
+              2,
+              3,
+              4,
+              4,
+              3,
+              2,
+              1,
+              1
+            ],
+            [
+              1,
+              3,
+              4,
+              3,
+              2,
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              2,
+              3,
+              2,
+              1,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              2,
+              1,
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              1
+            ]
+          ],
+          "you": [
+            2,
+            3
+          ],
+          "open": [
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              6
+            ],
+            [
+              3,
+              7
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              5,
+              4
+            ]
+          ],
+          "note": "Each cell is a service area. Darker means more fence companies with strong scores competing for the same homeowners."
+        }
+      ]
+    },
+    {
+      "id": "battle-card",
+      "short": "SWOT battle card",
+      "kicker": "Sales",
+      "title": "SWOT battle card",
+      "intro": "Turn a rival's scores and reviews into a one-page card your estimators read before the site visit, so they know where to press and what objections are coming.",
+      "question": "How do we win when the homeowner already has their bid?",
+      "outcome": "Strengths, weaknesses, opportunities, and threats for each tracked competitor, plus talk tracks drawn from what their own customers say about them.",
+      "steps": [
+        "Pick the two competitors you lose bids to most often.",
+        "Generate a card for each from their scores and review themes.",
+        "Review it in your weekly sales meeting and practice the talk tracks out loud."
+      ],
+      "signals": [
+        "Tracked competitors",
+        "Review themes",
+        "Rating trend",
+        "Website score",
+        "Services offered"
+      ],
+      "visuals": [
+        {
+          "type": "battlecard",
+          "title": "You vs. Ridgeline Fence Co.",
+          "tag": "example",
+          "quads": [
+            {
+              "label": "Their strengths",
+              "tone": "good",
+              "items": [
+                "4.8★ across 420 reviews",
+                "Ranks top 3 in the Map Pack for vinyl fence"
+              ]
+            },
+            {
+              "label": "Their weaknesses",
+              "tone": "bad",
+              "items": [
+                "Reviews mention install dates slipping",
+                "No online estimate; phone only"
+              ]
+            },
+            {
+              "label": "Your openings",
+              "tone": "accent",
+              "items": [
+                "They have no pool fence code page",
+                "Gate sag after a year is a recurring complaint"
+              ]
+            },
+            {
+              "label": "Watch for",
+              "tone": "neutral",
+              "items": [
+                "Running spring financing ads",
+                "Review volume rising 8% a quarter"
+              ]
+            }
+          ],
+          "talk": "“You'll get a locked install date in writing, and we handle the survey pins, the permit, and the 811 call. Ask the other bids if they'll put their install date on the contract.”"
+        }
+      ]
+    },
+    {
+      "id": "ads-engine",
+      "short": "Ads engine",
+      "kicker": "Advertising",
+      "title": "Google &amp; social ads engine",
+      "intro": "Read the ad copy and keywords your competitors pay for, then write ads around what nobody in your market is saying. Repairs, upgrades, pool fences, commercial: each gets a message rivals aren't using.",
+      "question": "What can we say in an ad that no one else is saying?",
+      "outcome": "A gap list of promises, services, and keywords missing from competitor ads, and draft headlines and descriptions ready for Google Ads or Meta.",
+      "steps": [
+        "Pull your top five competitors' paid keywords and ad copy.",
+        "List the claims they all make, then the gaps that your reviews prove you can deliver.",
+        "Launch one ad group per gap and track booked estimates, not clicks."
+      ],
+      "signals": [
+        "Competitor paid keywords",
+        "Ad copy",
+        "Search volume",
+        "Cost per click",
+        "Review themes"
+      ],
+      "visuals": [
+        {
+          "type": "adgap",
+          "title": "Competitor ads vs. the gap",
+          "tag": "example",
+          "left": {
+            "label": "Everyone says",
+            "items": [
+              "Free estimates",
+              "Family owned",
+              "Licensed &amp; insured"
+            ]
+          },
+          "right": {
+            "label": "Nobody says",
+            "items": [
+              "Install date in writing",
+              "We pull the permit &amp; HOA packet",
+              "Price range before the visit"
+            ]
+          },
+          "ad": {
+            "url": "yourfenceco.com/vinyl-privacy",
+            "headline": "Vinyl Privacy Fence, Install Date in Writing | See Prices Before We Visit",
+            "text": "Trace your yard online and get a price range in 2 minutes. We handle the permit, HOA and 811 locate. Rated 4.9★ locally."
+          },
+          "note": "The headline leads with a promise no competitor in this example market makes in their ads."
+        }
+      ]
+    },
+    {
+      "id": "website-leakage",
+      "short": "Website leakage",
+      "kicker": "Conversion",
+      "title": "Website leakage",
+      "intro": "Find the competitor whose website scores highest on our neuro audit and study how they take friction out of the path from first visit to booked estimate. Then close the same leaks on your own site.",
+      "question": "Where are homeowners leaving our site, and who has already fixed that?",
+      "outcome": "Your site scored on 12 persuasion principles next to the market leader and the market average, with the specific fixes ranked by impact.",
+      "steps": [
+        "Open the leader's site next to yours and walk the path a homeowner takes to book an estimate.",
+        "Fix your lowest two principles first; they are usually the cheapest wins.",
+        "Re-run the audit in 30 days and compare estimate requests and calls."
+      ],
+      "signals": [
+        "Neuro principle scores",
+        "CTA analysis",
+        "PageSpeed",
+        "Visual hierarchy",
+        "Booking flow"
+      ],
+      "visuals": [
+        {
+          "type": "bars",
+          "title": "Your site vs. the market leader",
+          "tag": "example",
+          "max": 5,
+          "benchmark": 4,
+          "rows": [
+            {
+              "label": "Clear next step",
+              "value": 2.4
+            },
+            {
+              "label": "Social validation",
+              "value": 2.8
+            },
+            {
+              "label": "Stories",
+              "value": 1.9
+            },
+            {
+              "label": "Cognitive friction",
+              "value": 3.1
+            }
+          ],
+          "legend": {
+            "avg": "Your site, example scores",
+            "bench": "Strong site benchmark (4.0, a target)"
+          },
+          "note": "Example scores out of 5 for a fictional contractor's homepage."
+        }
+      ],
+      "_real_visuals": [
+        {
+          "type": "bars",
+          "title": "Weakest persuasion principles, <vertical> websites",
+          "tag": "real",
+          "max": 5,
+          "benchmark": 4,
+          "rows": [
+            {
+              "label": "Scarcity &amp; fear of loss",
+              "value": null
+            },
+            {
+              "label": "Stories",
+              "value": null
+            },
+            {
+              "label": "Reciprocity",
+              "value": null
+            },
+            {
+              "label": "People like me",
+              "value": null
+            },
+            {
+              "label": "Social validation",
+              "value": null
+            },
+            {
+              "label": "Cognitive friction",
+              "value": null
+            }
+          ],
+          "legend": {
+            "avg": "Market average, <vertical> sites",
+            "bench": "Strong site benchmark (4.0, a target)"
+          },
+          "note": "In the <vertical> market: say what the numbers are drawn from and how many."
+        }
+      ]
+    },
+    {
+      "id": "lead-responsiveness",
+      "short": "Lead responsiveness",
+      "kicker": "Speed to lead",
+      "title": "Lead responsiveness",
+      "intro": "The fence company that answers first usually wins the job, especially when the dog got out last night. See how quickly and how consistently your competitors respond to reviews, after-hours inquiries, and estimate requests, then set a standard they can't match.",
+      "question": "When a homeowner reaches out, who answers first?",
+      "outcome": "A responsiveness score for you and each competitor: how often and how fast they reply to reviews, whether they take estimate requests online or after hours, and how often customers complain about slow communication.",
+      "steps": [
+        "Compare your review reply rate and reply time with the market's.",
+        "Set a written standard, such as every review answered in 48 hours and every web lead called back within 15 minutes during business hours.",
+        "Once you're meeting it, say so in your ads and on your estimate page."
+      ],
+      "signals": [
+        "Review reply rate",
+        "Reply time",
+        "Online booking",
+        "Office hours",
+        "Communication themes"
+      ],
+      "visuals": [
+        {
+          "type": "table",
+          "title": "Responsiveness vs. rivals",
+          "tag": "example",
+          "columns": [
+            "Company",
+            "Reply rate",
+            "Avg reply",
+            "Online estimate",
+            "After hours"
+          ],
+          "rows": [
+            {
+              "you": true,
+              "cells": [
+                "You",
+                "92%",
+                "1 day",
+                "yes",
+                "yes"
+              ]
+            },
+            {
+              "cells": [
+                "Ridgeline Fence Co.",
+                "35%",
+                "19 days",
+                "no",
+                "no"
+              ]
+            },
+            {
+              "cells": [
+                "Rival B",
+                "61%",
+                "8 days",
+                "yes",
+                "no"
+              ]
+            }
+          ],
+          "note": "How the competitor comparison looks for a contractor that has set a response standard."
+        }
+      ],
+      "_real_visuals": [
+        {
+          "type": "stats",
+          "title": "How fast does the <vertical> market answer?",
+          "tag": "real",
+          "stats": [
+            {
+              "value": null,
+              "label": "of reviews get an owner reply"
+            },
+            {
+              "value": null,
+              "label": "of 1–3★ reviews get a reply"
+            },
+            {
+              "value": null,
+              "label": "average wait for a reply"
+            }
+          ],
+          "note": "In the <vertical> market: say what the numbers are drawn from and how many."
+        }
+      ]
+    },
+    {
+      "id": "content-engine",
+      "short": "Content engine",
+      "kicker": "Search &amp; AI visibility",
+      "title": "Content engine",
+      "intro": "Our deep content crawl maps every service page in your market. See which pages your competitors have that you don't, and which topics nobody covers yet, then build the pages that attract searchers and turn them into homeowners who call.",
+      "question": "Which pages should we write next?",
+      "outcome": "A ranked content plan: missing service pages, thin pages to expand, and uncovered topics, each tied to search demand in your area.",
+      "steps": [
+        "Start with pages every top competitor has and you don't. That's table stakes.",
+        "Next, claim topics no one covers. Those are your fastest rankings, in Google and in AI answers.",
+        "Publish one page every two weeks and track its rank and leads."
+      ],
+      "signals": [
+        "D.E.E.P. content score",
+        "Service page crawl",
+        "On-page SEO",
+        "Target search terms",
+        "Backlink gaps"
+      ],
+      "visuals": [
+        {
+          "type": "table",
+          "title": "Service page coverage",
+          "tag": "example",
+          "columns": [
+            "Page topic",
+            "You",
+            "Rival A",
+            "Rival B",
+            "Status"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Vinyl privacy fence",
+                "has",
+                "has",
+                "has",
+                ""
+              ]
+            },
+            {
+              "cells": [
+                "Pool fence &amp; code",
+                "none",
+                "has",
+                "has",
+                "gap"
+              ]
+            },
+            {
+              "cells": [
+                "Fence repair &amp; gates",
+                "none",
+                "has",
+                "none",
+                ""
+              ]
+            },
+            {
+              "cells": [
+                "Commercial chain link",
+                "has",
+                "none",
+                "has",
+                ""
+              ]
+            },
+            {
+              "cells": [
+                "HOA approval guide",
+                "none",
+                "none",
+                "none",
+                "open"
+              ]
+            },
+            {
+              "cells": [
+                "Property line &amp; surveys",
+                "none",
+                "none",
+                "none",
+                "open"
+              ]
+            }
+          ],
+          "note": "“Gap” means two or more competitors rank with the page and you have none. “Open” means nobody in the market has it."
+        }
+      ]
+    },
+    {
+      "id": "voice-of-customer",
+      "short": "Voice of the customer",
+      "kicker": "Marketing",
+      "title": "Voice of the customer: your market's reviews are a treasure trove.",
+      "intro": "Every review in your market, yours and your competitors', is a customer telling you what matters. We read them all and sort them into themes, so your marketing speaks in your customers' own words.",
+      "question": "What do homeowners in our market value most, and where do they feel let down?",
+      "steps": [],
+      "signals": [
+        "Review themes",
+        "Sentiment",
+        "Mention share",
+        "Differentiators",
+        "Rating impact"
+      ],
+      "visuals": [
+        {
+          "type": "themes",
+          "title": "What customers in an example market talk about",
+          "tag": "example",
+          "rows": [
+            {
+              "label": "Crew",
+              "value": 120
+            },
+            {
+              "label": "Installation",
+              "value": 95
+            },
+            {
+              "label": "Pricing &amp; value",
+              "value": 80
+            },
+            {
+              "label": "Timeliness",
+              "value": 60
+            },
+            {
+              "label": "Follow-up after the job",
+              "value": 18,
+              "kind": "complaint"
+            }
+          ],
+          "note": "Fictional theme counts showing how the view reads."
+        }
+      ],
+      "plays": [
+        {
+          "title": "Headlines",
+          "text": "Use the exact phrases homeowners repeat as ad headlines and page titles. They already work on people like them."
+        },
+        {
+          "title": "Proof",
+          "text": "Feature the reviews that mention your strongest theme on your homepage and estimate page."
+        },
+        {
+          "title": "Promises",
+          "text": "Your competitors' complaint themes are your offer. If their reviews say missed install dates, put yours in writing."
+        },
+        {
+          "title": "Training",
+          "text": "Share the top praise and complaint themes with your crews every month."
+        },
+        {
+          "title": "Services",
+          "text": "Rising mentions of a material or service, like pool fences or gates, signal demand before search volume shows it."
+        },
+        {
+          "title": "Reputation",
+          "text": "Spot a negative theme forming in your own reviews early and fix the process behind it."
+        }
+      ],
+      "_real_visuals": [
+        {
+          "type": "themes",
+          "title": "What <vertical> customers talk about",
+          "tag": "real",
+          "rows": [
+            {
+              "label": "Staff",
+              "value": null
+            },
+            {
+              "label": "Installation",
+              "value": null
+            },
+            {
+              "label": "Product quality",
+              "value": null
+            },
+            {
+              "label": "Pricing &amp; value",
+              "value": null
+            },
+            {
+              "label": "Timeliness",
+              "value": null
+            },
+            {
+              "label": "Warranty &amp; after-service",
+              "value": null,
+              "kind": "complaint"
+            },
+            {
+              "label": "Communication",
+              "value": null,
+              "kind": "complaint"
+            }
+          ],
+          "note": "In the <vertical> market: say what the numbers are drawn from and how many."
+        },
+        {
+          "type": "quote",
+          "text": null,
+          "source": null,
+          "tag": "real",
+          "note": "In the <vertical> market: say what the numbers are drawn from and how many."
+        }
+      ]
+    }
+  ],
+  "closing": {
+    "eyebrow": "Next · Your market",
+    "title": "See these seven plays on your own market.",
+    "lede": "We'll run your company and your top competitors through FencePostWatcher and walk you through which play to start with.",
+    "button": "See the demo in action",
+    "secondary": "Talk to the team",
+    "fine": "FencePostWatcher is part of the Watcher platform by Seven Signals. Example visuals use fictional competitors."
+  }
+}

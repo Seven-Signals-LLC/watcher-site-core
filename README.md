@@ -25,7 +25,7 @@ A site repo contains:
 | `CLAUDE.md` | Copy of [`templates/CLAUDE.md`](templates/CLAUDE.md). Tells Claude to design the site with the `/hallmark` skill |
 | `src/pages/*.html` | The site's pages. Each starts with a `<!--meta {...} -->` JSON block (title, description, path, nav, schema) |
 | `research/` | Research documents for the industry report. Never published |
-| `content/use-cases.json` | The use cases page's words for this vertical. The core builds `/use-cases/` from it |
+| `content/use-cases.json` | The use cases page's words for this vertical, started from [`templates/use-cases.example.json`](templates/use-cases.example.json). The core builds `/use-cases/` from it |
 | `content/industry-report.json` | The industry report's content, drafted from `research/` by Claude and reviewed in a pull request. The core builds `/industry-report/` from it |
 | `src/partials/mark-light.html` | Optional: the logo mark for the dark footer. Without it, the header logo is reused |
 | `src/partials/hero-aside.html` | Optional: a card the standard hero places on its photo (see [docs/hero.md](docs/hero.md)) |
